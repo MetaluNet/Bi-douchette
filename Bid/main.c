@@ -29,9 +29,11 @@
 
 #include <fruit.h>
 #include <analog.h>
+#include <switch.h>
 
 unsigned char PERIOD=200;
 unsigned char t,t2=0;	
+t_delay mainLoop;
 	
 
 void highInterrupts()
@@ -43,10 +45,9 @@ void highInterrupts()
 void lowInterrupts()
 {}
 
-void main(void)
+void setup(void)
 {
 	//unsigned long tMain;
-	t_delay mainLoop;
 	
 	fruitInit();			
 
@@ -59,30 +60,33 @@ void main(void)
 	analogSelect(2,K3);
 	analogSelect(3,K5);
 	
-	EEreadMain();
-// ---------- Main loop ------------
-
-	t=PERIOD;
-	//tMain=GetTime();
+	switchInit();
+	switchSelect(0,K11);
+	switchSelect(1,K12);
+	//EEreadMain();
+	
 	delayStart(mainLoop, 5000);
+	t=PERIOD;
+}
 
-	while(1){
-		fraiseService();
-		analogService();
+void loop() {
+// ---------- Main loop ------------
+	fraiseService();
+	analogService();
+	switchService();
 
-		//if(Elapsed(tMain)>Micros(5000UL))
-		if(delayFinished(mainLoop))
-		{
-			//tMain=GetTime();
-			delayStart(mainLoop, 5000);
-			
-			analogSend();
-			
-			if(!t--){
-				t=PERIOD;
-				t2++;
-				printf("Cs Hello ! t2= %d\n", t2);
-			}
+	//if(Elapsed(tMain)>Micros(5000UL))
+	if(delayFinished(mainLoop))
+	{
+		//tMain=GetTime();
+		delayStart(mainLoop, 5000);
+		
+		if (!switchSend()) analogSend();
+		
+		if(!t--){
+			t=PERIOD;
+			t2++;
+			printf("Cs Hello ! t2= %d\n", t2);
 		}
 	}
 }
