@@ -1,4 +1,4 @@
-#N canvas 236 260 900 467 10;
+#N canvas 237 257 900 467 10;
 #X declare -stdpath moonlib;
 #X declare -stdpath hcs;
 #X declare -stdpath ggee;
@@ -11,7 +11,7 @@
 #X declare -path ../;
 #X obj 75 266 axl A;
 #X obj 82 233 route 0 1 2 3;
-#N canvas 351 74 548 415 Master 1;
+#N canvas 352 74 548 415 Master 0;
 #X obj 97 57 catch~ B-outl;
 #X obj 196 54 catch~ B-outr;
 #X obj 114 400 dac~;
@@ -42,6 +42,7 @@
 #X msg 203 174 50;
 #X obj 104 255 *~ 0.2;
 #X obj 110 164 echo 200;
+#X obj 360 298 sig~ 0.001;
 #X connect 0 0 11 0;
 #X connect 1 0 12 0;
 #X connect 3 0 11 0;
@@ -76,6 +77,8 @@
 #X connect 28 0 13 0;
 #X connect 28 0 14 0;
 #X connect 29 0 26 0;
+#X connect 30 0 2 1;
+#X connect 30 0 2 0;
 #X restore 325 47 pd Master;
 #X obj 82 207 analog/parse;
 #X obj 77 22 pied/pied 0 51511;
@@ -125,7 +128,7 @@
 -1 -1 0;
 #X msg 461 178 0;
 #X obj 557 211 hradio 15 1 0 4 empty empty empty 0 -8 0 10 -262144
--1 -1 1;
+-1 -1 0;
 #X msg 553 182 1;
 #N canvas 874 247 450 300 gammeseq 0;
 #X obj 297 90 GAMMEKB \$0-xtalgam;
