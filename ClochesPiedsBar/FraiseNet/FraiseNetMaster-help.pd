@@ -1,0 +1,8 @@
+#N canvas 976 139 321 187 10;
+#X declare -lib motex -lib hcs -lib maxlib -lib ggee -lib zexy -lib
+list-abs;
+#X declare -lib moonlib -lib iemlib;
+#X obj 42 35 Fr2Pied 0 112233;
+#X obj 42 128 FraiseNetMaster \$0;
+#X obj 172 131 PdServeur \$0 424242;
+#X coords 0 0 1 1 50 50 0;

@@ -1,0 +1,730 @@
+#N canvas 67 182 716 479 10;
+#X declare -lib iemlib;
+#X declare -path MasterSub;
+#X declare -path ABS;
+#X declare -path AutoPreset;
+#X declare -path FraiseNet;
+#X declare -path ../;
+#X msg 357 90 \; pd dsp \$1;
+#X obj 325 91 tgl 30 0 empty empty empty 0 -6 0 8 -24198 -258699 -1
+1 1;
+#X obj 325 33 loadbang;
+#X obj 325 52 del 2000;
+#X msg 325 72 1;
+#N canvas 374 82 398 318 in 0;
+#X obj 51 215 unpack 0 0 0;
+#X obj 90 236 + 11;
+#X obj 90 256 change;
+#X obj 90 276 outlet;
+#X obj 51 195 prvu~;
+#X obj 37 236 s~ inl;
+#X obj 31 58 mull~ 1 10;
+#N canvas 242 97 192 215 clean_limit 0;
+#X obj 39 44 inlet~;
+#X obj 39 156 outlet~;
+#X obj 39 102 nop~;
+#X obj 39 134 *~;
+#X obj 74 102 limiter~;
+#X connect 0 0 2 0;
+#X connect 0 0 4 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 3 1;
+#X restore 31 105 pd clean_limit;
+#X obj 68 8 inlet;
+#X msg 138 69 t_metro 50 \, t_hold 50 \, t_release 50;
+#X obj 137 47 loadbang;
+#X obj 38 163 +~;
+#X msg 280 122 1;
+#X obj 184 125 l compressor~ 2;
+#X obj 30 81 hip~ 150;
+#X obj 142 13 noisegate~ 65 1 500;
+#X obj 12 16 adc~ 1;
+#X connect 0 1 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 4 0 0 0;
+#X connect 6 0 14 0;
+#X connect 7 0 11 0;
+#X connect 8 0 6 1;
+#X connect 9 0 4 0;
+#X connect 10 0 9 0;
+#X connect 11 0 4 0;
+#X connect 11 0 5 0;
+#X connect 12 0 13 1;
+#X connect 14 0 7 0;
+#X connect 16 0 6 0;
+#X restore 274 9 pd in;
+#X obj 275 33 vu 15 80 empty empty -1 -8 0 8 -66577 -1 0 0;
+#X obj 31 378 s \$0-clock;
+#X obj 43 337 r \$0-pdnet-fromserver;
+#X obj 31 358 route clock Gammes;
+#X obj 106 379 s Gammes;
+#X obj 108 398 s Gammestab;
+#X obj 106 419 table Gammestab;
+#X obj 82 403 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 31 312 r \$0-fromserver;
+#X obj 294 33 vsl 15 80 0.1 50 1 1 empty empty empty 0 -9 0 10 -262144
+-1 -1 5461 1;
+#X msg 311 8 1;
+#X floatatom 279 118 5 0 0 0 - - -;
+#X obj 33 275 PdClient \$0 ClochesPieds;
+#X obj 396 35 keyon F1;
+#X obj 396 60 sel 1;
+#X obj 134 312 FraiseNet \$0;
+#X obj 30 160 import iemlib;
+#X obj 30 180 declare -path MasterSub;
+#X obj 30 11 MSMaster CP;
+#N canvas 830 460 450 300 Notes99bis 1;
+#X text 18 104 roto -paquerette : (par colonnes) chants1 chants2 chants1/2stretch
+;
+#X text 22 83 sylla -crocus: banjo \, cbbow \, gtClaireSeb \, gtCompSeb
+\, tp \, tb;
+#X text 26 197 general : release \, maxTime \, damping hi/low granuls
+\, reverbs (time \, damping) \, predelays;
+#X text 24 65 myo : epinette \, fluteB \, percu \, GtDidier \, cello
+\, cb;
+#X text 17 37 repie -trefle: toypiano \, piano \, saxB \, sax;
+#X restore 236 384 pd Notes99bis;
+#N canvas 878 87 402 323 Interface 1;
+#X obj 0 1 cnv 15 400 320 empty empty empty 20 12 0 14 -90881 -66577
+0;
+#X obj 239 13 cnv 15 120 120 empty empty Myosotis 20 12 2 14 -225271
+-66577 0;
+#X obj 284 49 tgl 30 0 \$0-myoso3-snd \$0-myoso3-rcv 3 13 15 1 10 -262131
+-1 -1 0 1;
+#X obj 317 49 tgl 30 0 \$0-myoso4-snd \$0-myoso4-rcv 4 13 15 1 10 -262131
+-1 -1 0 1;
+#X obj 317 82 tgl 30 0 \$0-myoso5-snd \$0-myoso5-rcv 5 13 15 1 10 -262131
+-1 -1 0 1;
+#X obj 251 49 tgl 30 0 \$0-myoso2-snd \$0-myoso2-rcv 2 13 15 1 10 -262131
+-1 -1 0 1;
+#X obj 284 82 tgl 30 0 \$0-myoso0-snd \$0-myoso0-rcv E 13 15 1 10 -228992
+-1 -1 0 1;
+#X obj 251 82 tgl 30 0 \$0-myoso1-snd \$0-myoso1-rcv 1 13 15 1 10 -262131
+-1 -1 0 1;
+#X obj 225 211 cnv 15 100 100 empty empty Répiétiteur 5 12 2 14 -225271
+-66577 0;
+#X obj 244 238 tgl 30 0 \$0-rep1-snd \$0-rep1-rcv 1 13 15 1 10 -262144
+-1 -1 0 1;
+#X obj 276 238 tgl 30 0 \$0-rep2-snd \$0-rep2-rcv 2 13 15 1 10 -262144
+-1 -1 0 1;
+#X obj 244 270 tgl 30 0 \$0-rep3-snd \$0-rep3-rcv 3 13 15 1 10 -262144
+-1 -1 0 1;
+#X obj 276 270 tgl 30 0 \$0-rep4-snd \$0-rep4-rcv 4 13 15 1 10 -262144
+-1 -1 0 1;
+#X obj 25 10 cnv 15 200 70 empty empty Syllaboratoire 40 12 2 14 -225271
+-66577 0;
+#X obj 30 37 tgl 30 0 \$0-s1-snd \$0-s1-rcv I 13 15 1 10 -262144 -1
+-1 0 1;
+#X obj 62 37 tgl 30 0 \$0-s2-snd \$0-s2-rcv PO 7 15 1 10 -262144 -1
+-1 0 1;
+#X obj 94 37 tgl 30 0 \$0-s3-snd \$0-s3-rcv PO 7 15 1 10 -262144 -1
+-1 0 1;
+#X obj 126 37 tgl 30 0 \$0-s4-snd \$0-s4-rcv TAM 2 15 1 10 -262144
+-1 -1 0 1;
+#X obj 160 37 tgl 30 0 \$0-st-snd \$0-st-rcv hippopotame 1 15 1 8 -262131
+-1 -1 0 1;
+#X obj 194 143 cnv 15 200 60 empty empty Collecsonneurs 40 12 2 14
+-225271 -66577 0;
+#X obj 203 168 tgl 30 0 \$0-tellucri-snd \$0-tellucri-rcv cri 5 15
+1 10 -262144 -1 -1 0 1;
+#X obj 256 169 tgl 30 0 \$0-tellujetaime-snd \$0-tellujetaime-rcv jetaime
+2 15 1 10 -262144 -1 -1 0 1;
+#X obj 302 169 tgl 30 0 \$0-telludeteste-snd \$0-telludeteste-rcv deteste
+2 15 1 10 -262144 -1 -1 0 1;
+#X obj 9 124 cnv 15 170 180 empty empty Rotobservatoire 20 12 2 14
+-225271 -66577 0;
+#X obj 74 149 tgl 30 0 \$0-rotob1-snd \$0-rotob1-rcv 1:E 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 117 166 tgl 30 0 \$0-rotob2-snd \$0-rotob2-rcv 2:SE 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 139 208 tgl 30 0 \$0-rotob3-snd \$0-rotob3-rcv 3:S 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 120 250 tgl 30 0 \$0-rotob4-snd \$0-rotob4-rcv 4:SO 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 76 269 tgl 30 0 \$0-rotob5-snd \$0-rotob5-rcv 5:O 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 31 165 tgl 30 0 \$0-rotob8-snd \$0-rotob8-rcv 8:NE 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 16 208 tgl 30 0 \$0-rotob7-snd \$0-rotob7-rcv 7:N 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 34 251 tgl 30 0 \$0-rotob6-snd \$0-rotob6-rcv 6:NO 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 74 208 tgl 30 0 \$0-rotob0-snd \$0-rotob0-rcv C 10 15 1 10 -225280
+-1 -1 0 1;
+#X obj 357 169 tgl 30 0 \$0-telludiing-snd \$0-telludiing-rcv diing
+2 15 1 10 -262144 -1 -1 0 1;
+#X restore 472 129 pd Interface;
+#N canvas 7 176 245 292 interfguts 0;
+#X obj 47 13 dispatch \$0-s 1 4;
+#X obj 47 32 dispatch \$0-rep 1 4;
+#N canvas 197 0 450 258 8bits 0;
+#X obj 159 29 inlet;
+#X obj 39 110 & 128;
+#X obj 39 131 != 0;
+#X obj 39 152 change;
+#X obj 91 131 != 0;
+#X obj 91 152 change;
+#X obj 141 131 != 0;
+#X obj 141 152 change;
+#X obj 193 131 != 0;
+#X obj 193 152 change;
+#X obj 241 132 != 0;
+#X obj 241 153 change;
+#X obj 293 132 != 0;
+#X obj 293 153 change;
+#X obj 343 132 != 0;
+#X obj 343 153 change;
+#X obj 395 132 != 0;
+#X obj 395 153 change;
+#X obj 159 50 t f f f f f f f f;
+#X obj 395 111 & 1;
+#X obj 343 111 & 2;
+#X obj 293 111 & 4;
+#X obj 241 111 & 8;
+#X obj 193 110 & 16;
+#X obj 141 110 & 32;
+#X obj 91 110 & 64;
+#X obj 193 223 outlet;
+#X msg 39 172 7 \$1;
+#X msg 343 175 1 \$1;
+#X msg 395 175 0 \$1;
+#X msg 293 174 2 \$1;
+#X msg 241 174 3 \$1;
+#X msg 193 173 4 \$1;
+#X msg 141 173 5 \$1;
+#X msg 91 172 6 \$1;
+#X connect 0 0 18 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 27 0;
+#X connect 4 0 5 0;
+#X connect 5 0 34 0;
+#X connect 6 0 7 0;
+#X connect 7 0 33 0;
+#X connect 8 0 9 0;
+#X connect 9 0 32 0;
+#X connect 10 0 11 0;
+#X connect 11 0 31 0;
+#X connect 12 0 13 0;
+#X connect 13 0 30 0;
+#X connect 14 0 15 0;
+#X connect 15 0 28 0;
+#X connect 16 0 17 0;
+#X connect 17 0 29 0;
+#X connect 18 0 1 0;
+#X connect 18 1 25 0;
+#X connect 18 2 24 0;
+#X connect 18 3 23 0;
+#X connect 18 4 22 0;
+#X connect 18 5 21 0;
+#X connect 18 6 20 0;
+#X connect 18 7 19 0;
+#X connect 19 0 16 0;
+#X connect 20 0 14 0;
+#X connect 21 0 12 0;
+#X connect 22 0 10 0;
+#X connect 23 0 8 0;
+#X connect 24 0 6 0;
+#X connect 25 0 4 0;
+#X connect 27 0 26 0;
+#X connect 28 0 26 0;
+#X connect 29 0 26 0;
+#X connect 30 0 26 0;
+#X connect 31 0 26 0;
+#X connect 32 0 26 0;
+#X connect 33 0 26 0;
+#X connect 34 0 26 0;
+#X restore 55 93 pd 8bits;
+#X obj 47 51 dispatch \$0-myoso 0 5;
+#X obj 47 69 dispatch \$0-rotob 0 8;
+#N canvas 443 87 477 437 Myo 0;
+#X obj 165 281 s \$0-myoso-rcv;
+#X msg 88 187 1 \$1;
+#X msg 43 187 2 \$1;
+#X msg 110 184 3 \$1;
+#X msg 182 179 4 \$1;
+#X msg 144 183 5 \$1;
+#X msg 254 249 0 \$1;
+#X obj 295 161 clip 0 1;
+#X obj 295 183 change;
+#X obj 297 234 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 296 205 pow 0.5;
+#X obj 83 29 FruitReceive Myo;
+#X obj 82 51 route s a;
+#X obj 142 134 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 184 142 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 88 133 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 110 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 62 126 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 214 24 route 0;
+#X floatatom 321 20 5 0 0 0 - - -;
+#X obj 288 43 mavg 10;
+#X obj 290 66 mavg 10;
+#X obj 293 90 mavg 10;
+#X obj 295 113 mavg 10;
+#X obj 295 139 range 4095 2500 0 1;
+#X msg 147 320 111111;
+#X msg 132 341 c 3 i 63;
+#X obj 132 376 FruitSend Myo;
+#X msg 207 346 W1;
+#X obj 82 92 route 0 1 2 3 4 5;
+#X obj 211 144 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 308 280 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 214 82 < 100;
+#X obj 214 105 change;
+#X obj 244 147 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 7 0 8 0;
+#X connect 8 0 10 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 29 0;
+#X connect 12 1 18 0;
+#X connect 13 0 5 0;
+#X connect 14 0 4 0;
+#X connect 15 0 1 0;
+#X connect 16 0 3 0;
+#X connect 17 0 2 0;
+#X connect 18 0 19 0;
+#X connect 18 0 32 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 24 0 7 0;
+#X connect 26 0 27 0;
+#X connect 28 0 27 1;
+#X connect 29 0 17 0;
+#X connect 29 1 15 0;
+#X connect 29 2 16 0;
+#X connect 29 3 13 0;
+#X connect 29 4 14 0;
+#X connect 29 5 30 0;
+#X connect 32 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 0 6 0;
+#X restore 49 142 pd Myo;
+#N canvas 0 0 593 535 Sylla 0;
+#X obj 67 262 s \$0-st-rcv;
+#X msg 130 153 1 \$1;
+#X msg 206 155 2 \$1;
+#X msg 167 154 3 \$1;
+#X msg 94 151 4 \$1;
+#X msg 261 155 5 \$1;
+#X obj 114 59 route s a;
+#X obj 165 131 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 203 128 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 99 128 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 133 127 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 66 131 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 113 82 route 0 1 2 3 4 5 6 7 8 9;
+#X obj 341 126 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 376 125 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 283 126 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 306 124 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 239 128 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 188 265 s \$0-s-rcv;
+#X obj 115 34 FruitReceive Sylla;
+#X msg 280 183 111110;
+#X msg 273 207 c 3 i 62;
+#X obj 272 260 FruitSend Sylla;
+#X msg 285 235 c 3 i 0;
+#X msg 357 238 W0;
+#X connect 1 0 18 0;
+#X connect 2 0 18 0;
+#X connect 3 0 18 0;
+#X connect 4 0 18 0;
+#X connect 5 0 18 0;
+#X connect 6 0 12 0;
+#X connect 7 0 3 0;
+#X connect 8 0 2 0;
+#X connect 9 0 4 0;
+#X connect 10 0 1 0;
+#X connect 11 0 0 0;
+#X connect 12 0 11 0;
+#X connect 12 1 9 0;
+#X connect 12 2 10 0;
+#X connect 12 3 7 0;
+#X connect 12 4 8 0;
+#X connect 12 5 17 0;
+#X connect 12 6 15 0;
+#X connect 12 7 16 0;
+#X connect 12 8 13 0;
+#X connect 19 0 6 0;
+#X connect 21 0 22 0;
+#X connect 23 0 22 0;
+#X connect 24 0 22 1;
+#X restore 49 166 pd Sylla;
+#N canvas 297 56 450 300 Repie 0;
+#X msg 152 150 1 \$1;
+#X msg 111 151 2 \$1;
+#X msg 59 150 3 \$1;
+#X msg 14 152 4 \$1;
+#X msg 248 142 5 \$1;
+#X obj 101 46 route s a;
+#X obj 149 114 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 15 121 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 70 117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 113 116 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 100 69 route 0 1 2 3 4 5 6 7 8 9;
+#X obj 328 113 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 363 112 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 270 113 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 293 111 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 226 115 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 272 222 c 3 i 0;
+#X msg 346 222 W0;
+#X obj 102 21 FruitReceive Repie;
+#X obj 175 252 s \$0-rep-rcv;
+#X obj 259 247 FruitSend Repie;
+#X msg 267 170 11110;
+#X msg 260 194 c 3 i 30;
+#X connect 0 0 19 0;
+#X connect 1 0 19 0;
+#X connect 2 0 19 0;
+#X connect 3 0 19 0;
+#X connect 4 0 19 0;
+#X connect 5 0 10 0;
+#X connect 6 0 0 0;
+#X connect 7 0 3 0;
+#X connect 8 0 2 0;
+#X connect 9 0 1 0;
+#X connect 10 0 7 0;
+#X connect 10 1 8 0;
+#X connect 10 2 9 0;
+#X connect 10 3 6 0;
+#X connect 10 5 15 0;
+#X connect 10 6 13 0;
+#X connect 10 7 14 0;
+#X connect 10 8 11 0;
+#X connect 16 0 20 0;
+#X connect 17 0 20 1;
+#X connect 18 0 5 0;
+#X connect 22 0 20 0;
+#X restore 49 188 pd Repie;
+#N canvas 499 173 450 300 Roto 0;
+#X msg 107 160 1 \$1;
+#X msg 143 156 2 \$1;
+#X msg 379 147 3 \$1;
+#X msg 340 143 4 \$1;
+#X msg 254 152 5 \$1;
+#X obj 125 35 route s a;
+#X obj 149 114 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 185 117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 72 115 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 113 116 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 344 121 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 372 119 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 257 117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 300 121 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 226 115 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 300 236 c 3 i 0;
+#X msg 374 236 W0;
+#X obj 126 10 FruitReceive Roto;
+#X obj 287 261 FruitSend Roto;
+#X msg 360 205 1.11111e+09;
+#X obj 33 116 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 58 156 7 \$1;
+#X msg 19 162 8 \$1;
+#X msg 215 148 6 \$1;
+#X msg 175 154 0 \$1;
+#X msg 336 181 c 3 i 1022;
+#X obj 175 252 s \$0-rotob-rcv;
+#X obj 124 58 route 0 1 2 3 4 5 6 7 8 9;
+#X msg 362 43 c 3 i 3776;
+#X msg 287 207 c 3 i 2046;
+#X connect 0 0 26 0;
+#X connect 1 0 26 0;
+#X connect 2 0 26 0;
+#X connect 3 0 26 0;
+#X connect 4 0 26 0;
+#X connect 5 0 27 0;
+#X connect 6 0 1 0;
+#X connect 7 0 24 0;
+#X connect 8 0 21 0;
+#X connect 9 0 0 0;
+#X connect 10 0 3 0;
+#X connect 11 0 2 0;
+#X connect 12 0 4 0;
+#X connect 14 0 23 0;
+#X connect 15 0 18 0;
+#X connect 16 0 18 1;
+#X connect 17 0 5 0;
+#X connect 20 0 22 0;
+#X connect 21 0 26 0;
+#X connect 22 0 26 0;
+#X connect 23 0 26 0;
+#X connect 24 0 26 0;
+#X connect 27 0 20 0;
+#X connect 27 1 8 0;
+#X connect 27 2 9 0;
+#X connect 27 3 6 0;
+#X connect 27 4 7 0;
+#X connect 27 5 14 0;
+#X connect 27 6 12 0;
+#X connect 27 7 13 0;
+#X connect 27 8 10 0;
+#X connect 27 9 11 0;
+#X connect 29 0 18 0;
+#X restore 50 211 pd Roto;
+#X restore 472 148 pd interfguts;
+#X text 455 183 1;
+#X text 458 232 2;
+#X text 458 279 3;
+#X text 458 326 4;
+#X obj 453 25 catch~ outl;
+#X obj 530 26 catch~ outr;
+#X obj 453 46 out CP 1;
+#X obj 530 49 out CP 2;
+#X obj 604 27 catch~ rev1;
+#N canvas 470 391 640 547 MasterCtl 1;
+#X floatatom 66 159 5 0 0 0 - - -;
+#X msg 123 102 2000;
+#X msg 84 100 1000;
+#X msg 53 100 500;
+#X msg 24 98 0;
+#X msg 59 222 0;
+#X msg 86 222 1000;
+#X floatatom 67 262 5 0 0 0 - - -;
+#X obj 68 289 s \$0-maxTime;
+#X obj 246 170 t b b;
+#X obj 306 193 random 2;
+#X obj 246 194 random 7;
+#X obj 246 254 gamme 90 40 1 0 1 0 1 1 0 1 1 0 1 0;
+#X floatatom 338 289 5 0 0 0 - - -;
+#X obj 243 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 246 222 get 0 \$1;
+#X obj 247 300 pack f f;
+#X msg 247 320 set \$1 \$2;
+#X obj 241 42 metro 2000;
+#X obj 241 23 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 246 344 gamme 90 40 1 0 0 0 0 0 0 1 1 0 0 0;
+#X msg 207 393 0 \$1 \, 1 \$1;
+#X floatatom 311 395 5 0 0 0 - - -;
+#X obj 246 415 s Gammes;
+#X obj 65 182 s \$0-release;
+#X obj 349 34 s \$0-tempoMs;
+#X msg 347 12 2000;
+#X obj 349 -8 loadbang;
+#X obj 68 -2 r \$0-c1-con-snd;
+#X obj 68 42 pow 3;
+#X obj 70 67 * 4000;
+#X obj 153 101 * 8000;
+#X obj 155 124 + 10;
+#X obj 152 77 pow 2;
+#X floatatom 162 289 5 0 0 0 - - -;
+#X obj 312 58 r \$0-tempoMs;
+#X obj 117 347 s \$0-tempoMs;
+#X obj 163 227 * 2500;
+#X obj 500 206 s \$0-c1-con-rcv;
+#X obj 502 133 del 100;
+#X msg 501 177 2001 \$1;
+#X msg 506 155 0;
+#X msg 472 113 1;
+#X obj 468 83 b;
+#X obj 160 249 + 200;
+#X obj 68 19 route 0 1 2 4;
+#X obj 142 51 s CP-Master-rcv;
+#X obj 413 320 random 1000;
+#X obj 413 340 / 1000;
+#X obj 413 361 pow 3;
+#X obj 413 294 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 410 411 + 1.5;
+#X obj 409 438 i;
+#X floatatom 416 501 5 0 0 0 - - -;
+#X obj 413 386 * 3;
+#X obj 419 461 until;
+#X obj 470 479 print;
+#X text 531 155 ledRouge;
+#X obj 179 -2 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 175 28 5 0 0 0 - - -;
+#X connect 0 0 24 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 11 0;
+#X connect 9 1 10 0;
+#X connect 10 0 16 1;
+#X connect 11 0 15 0;
+#X connect 12 0 13 0;
+#X connect 12 0 16 0;
+#X connect 14 0 43 0;
+#X connect 14 0 50 0;
+#X connect 15 0 12 0;
+#X connect 16 0 17 0;
+#X connect 17 0 20 0;
+#X connect 18 0 14 0;
+#X connect 19 0 18 0;
+#X connect 20 3 22 0;
+#X connect 20 3 21 0;
+#X connect 21 0 23 0;
+#X connect 26 0 25 0;
+#X connect 27 0 26 0;
+#X connect 27 0 19 0;
+#X connect 28 0 45 0;
+#X connect 29 0 30 0;
+#X connect 30 0 0 0;
+#X connect 31 0 32 0;
+#X connect 32 0 7 0;
+#X connect 33 0 31 0;
+#X connect 35 0 18 1;
+#X connect 37 0 44 0;
+#X connect 39 0 41 0;
+#X connect 40 0 38 0;
+#X connect 41 0 40 0;
+#X connect 42 0 40 0;
+#X connect 43 0 42 0;
+#X connect 43 0 39 0;
+#X connect 44 0 34 0;
+#X connect 44 0 36 0;
+#X connect 45 0 29 0;
+#X connect 45 1 33 0;
+#X connect 45 2 37 0;
+#X connect 45 3 46 0;
+#X connect 45 3 59 0;
+#X connect 47 0 48 0;
+#X connect 48 0 49 0;
+#X connect 49 0 54 0;
+#X connect 50 0 47 0;
+#X connect 51 0 52 0;
+#X connect 52 0 53 0;
+#X connect 52 0 55 0;
+#X connect 54 0 51 0;
+#X connect 55 0 9 0;
+#X connect 55 0 56 0;
+#X connect 58 0 46 0;
+#X restore 235 364 pd MasterCtl;
+#X obj 30 200 declare -path ABS;
+#X obj 30 219 declare -path AutoPreset;
+#X obj 31 239 declare -path FraiseNet;
+#X obj 473 186 Repie \$0 1 2 3 4 5 6 7 7 7;
+#X obj 477 230 Myosotis \$0 3 4 1 5 1 6 7 7;
+#X obj 479 277 Roto \$0 4 5 3 6 2 7 1 1 1;
+#X obj 481 326 Syllabo \$0 6 7 5 4 3 2 1 1 1;
+#X obj 234 432 Fr2Fruit 1 KEP0 40 ClochePied26k22;
+#X obj 456 419 FrKE2Module \$0 KEP0 1;
+#X obj 329 137 s \$0-on-snd;
+#N canvas 0 0 670 407 testPresent 1;
+#X obj 261 12 FruitReceive KEP0;
+#X obj 259 33 route present;
+#X obj 261 82 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 274 274 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 272 333 s Fraise-KEP0-on;
+#X obj 260 108 == 0;
+#X obj 261 146 metro 5000;
+#X obj 257 194 del 500;
+#X msg 182 182 stop;
+#X msg 283 168 1;
+#X msg 259 220 0;
+#X obj 179 65 loadbang;
+#X msg 199 97 0;
+#X obj 326 230 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 368 239 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 260 60 change;
+#X obj 184 151 sel 0;
+#X msg 437 178 2000 1;
+#X obj 436 267 s \$0-c1-con-rcv;
+#X obj 438 135 del 500;
+#X obj 439 95 sel 1;
+#X connect 0 0 1 0;
+#X connect 1 0 15 0;
+#X connect 2 0 5 0;
+#X connect 2 0 20 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 5 0 16 0;
+#X connect 6 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 10 0;
+#X connect 7 0 13 0;
+#X connect 8 0 7 0;
+#X connect 9 0 3 0;
+#X connect 10 0 3 0;
+#X connect 11 0 12 0;
+#X connect 12 0 2 0;
+#X connect 15 0 2 0;
+#X connect 16 0 8 0;
+#X connect 17 0 18 0;
+#X connect 19 0 17 0;
+#X connect 20 0 19 0;
+#X restore 235 411 pd testPresent;
+#X obj 230 314 Fr2Fruit 1 Sylla 52 ClochePied26k22;
+#X obj 223 171 Fr2Fruit 1 Repie 53 ClochePied26k22;
+#X obj 234 218 Fr2Fruit 1 Myo 51 ClochePied26k22;
+#X obj 231 267 Fr2Fruit 1 Roto 50 ClochePied26k22;
+#X connect 1 0 0 0;
+#X connect 1 0 47 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;
+#X connect 5 0 6 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 9 0 13 0;
+#X connect 9 1 10 0;
+#X connect 9 1 11 0;
+#X connect 14 0 9 0;
+#X connect 15 0 5 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 19 0 20 0;
+#X connect 32 0 34 0;
+#X connect 33 0 35 0;

@@ -1,0 +1,14 @@
+#N canvas 1060 407 249 316 10;
+#X obj 12 155 r Fr2;
+#X obj 11 17 r \$1-fromclients;
+#X obj 12 200 s \$1-toclients;
+#X obj 12 177 list prepend _all_ Fr2;
+#X obj 11 40 nroute 2Fr2 2;
+#X obj 45 88 s 2Fr2;
+#X obj 11 62 list split 2;
+#X connect 0 0 3 0;
+#X connect 1 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 6 1 5 0;
+#X coords 0 0 1 1 50 50 0;

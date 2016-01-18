@@ -1,0 +1,142 @@
+#N canvas 82 412 516 321 10;
+#X declare -path ../;
+#X obj 12 205 tgl 20 0 \$0-on-snd \$0-on-rcv empty 0 -6 0 8 -258699
+-1 -1 0 1;
+#X obj 11 185 r \$0-onoff;
+#X obj 12 116 mknob 25 100 0 1 0 1 \$0-vol-snd \$0-vol-rcv vol -2 -6
+193 10 -258699 -1 -1 2411 1;
+#X obj 12 231 switch~;
+#N canvas 148 350 298 213 master 0;
+#X obj 182 34 catch~ \$0-out;
+#X obj 140 111 *~;
+#X obj 14 22 catch~ \$0-parole_out;
+#X obj 14 66 hip~ 800;
+#X obj 24 43 catch~ \$0-parole_out2;
+#X obj 175 91 pow 2;
+#X obj 175 112 * 4;
+#X obj 175 69 r \$0-vol-snd;
+#X obj 101 166 out CP \$2;
+#X obj 166 166 out CP \$3;
+#X connect 0 0 3 0;
+#X connect 1 0 8 0;
+#X connect 1 0 9 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 1 1;
+#X connect 7 0 5 0;
+#X restore 11 50 pd master;
+#N canvas 1164 304 177 224 Interface 0;
+#X obj 4 3 cnv 15 170 180 empty empty Rotobservatoire 20 12 2 14 -225271
+-66577 0;
+#X obj 69 28 tgl 30 0 \$0-rotob1-snd \$0-rotob1-rcv 1:E 7 15 1 10 -262131
+-1 -1 0 1;
+#X obj 112 45 tgl 30 0 \$0-rotob2-snd \$0-rotob2-rcv 2:SE 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 134 87 tgl 30 0 \$0-rotob3-snd \$0-rotob3-rcv 3:S 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 115 129 tgl 30 0 \$0-rotob4-snd \$0-rotob4-rcv 4:SO 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 71 148 tgl 30 0 \$0-rotob5-snd \$0-rotob5-rcv 5:O 7 15 1 10
+-262131 -1 -1 0 1;
+#X obj 26 44 tgl 30 0 \$0-rotob8-snd \$0-rotob8-rcv 8:NE 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 11 87 tgl 30 0 \$0-rotob7-snd \$0-rotob7-rcv 7:N 7 15 1 10 -262131
+-1 -1 0 1;
+#X obj 29 130 tgl 30 0 \$0-rotob6-snd \$0-rotob6-rcv 6:NO 2 15 1 10
+-262131 -1 -1 0 1;
+#X obj 69 87 tgl 30 0 \$0-rotob0-snd \$0-rotob0-rcv C 10 15 1 10 -225280
+-1 -1 0 1;
+#X text 35 186 keyboard:;
+#X text 9 202 c d f g h j k l m;
+#X restore 11 12 pd Interface;
+#N canvas 585 274 774 492 interfguts 0;
+#X obj 59 42 keyname;
+#X obj 59 67 pack f s;
+#X msg 59 118 \$2 \$1;
+#X obj 59 88 spigot;
+#X obj 109 92 tgl 15 0 empty empty keyboard 0 -6 1 8 -241291 -1 -1
+0 1;
+#X obj 134 94 r \$0-getkeyb;
+#X msg 10 176 1 \$1;
+#X msg 43 176 2 \$1;
+#X msg 79 176 3 \$1;
+#X msg 115 176 4 \$1;
+#X obj 224 36 r \$1-rotob-snd;
+#X obj 224 56 s \$0-rotob-rcv;
+#X obj 59 139 route d f g h j k l m c;
+#X msg 150 176 5 \$1;
+#X msg 186 176 6 \$1;
+#X msg 222 176 7 \$1;
+#X msg 258 176 8 \$1;
+#X msg 294 176 0 \$1;
+#X obj 124 219 s \$0-rotob-rcv;
+#X obj 57 14 dispatch \$0-rotob 0 8;
+#X obj 139 332 s \$0-deb1time;
+#X obj 48 332 s \$0-deb0time;
+#X obj 98 277 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 102 298 init 50;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 1 0 3 0;
+#X connect 2 0 12 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 0;
+#X connect 6 0 18 0;
+#X connect 7 0 18 0;
+#X connect 8 0 18 0;
+#X connect 9 0 18 0;
+#X connect 10 0 11 0;
+#X connect 12 0 6 0;
+#X connect 12 1 7 0;
+#X connect 12 2 8 0;
+#X connect 12 3 9 0;
+#X connect 12 4 13 0;
+#X connect 12 5 14 0;
+#X connect 12 6 15 0;
+#X connect 12 7 16 0;
+#X connect 12 8 17 0;
+#X connect 13 0 18 0;
+#X connect 14 0 18 0;
+#X connect 15 0 18 0;
+#X connect 16 0 18 0;
+#X connect 17 0 18 0;
+#X connect 22 0 23 0;
+#X connect 23 0 21 0;
+#X connect 23 0 20 0;
+#X restore 11 31 pd interfguts;
+#X obj 12 80 tgl 15 0 \$0-getkeyb \$0-getkeyb-rcv keyboard 0 -6 1 8
+-241291 -1 -1 0 1;
+#X obj 99 14 declare -path ../;
+#X obj 312 27 dollarg;
+#X obj 312 8 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 341 4 loadbang;
+#X obj 53 117 mknob 25 100 0 1 0 1 \$0-volgran-snd \$0-volgran-rcv
+volgran -2 -6 193 10 -258699 -1 -1 9900 1;
+#X obj 324 120 Voix2 \$0 2 2;
+#X obj 326 163 Voix2 \$0 4 4;
+#X obj 323 100 Voix2 \$0 1 1;
+#X obj 325 143 Voix2 \$0 3 3;
+#X obj 327 183 Voix2 \$0 5 5;
+#X obj 328 202 Voix2 \$0 6 6;
+#X obj 130 85 Bank \$0 1 ChantVincent 16 1;
+#X obj 131 110 Bank \$0 2 ChantNathalie 16 1;
+#X obj 130 133 Bank \$0 3 ChantDenis 8 1;
+#X obj 130 158 Bank \$0 4 ChantSakina 8 1;
+#X obj 130 180 Bank \$0 5 ChantChristian 8 1;
+#X obj 129 205 Bank \$0 6 ChantBarbara 8 1;
+#X obj 312 51 Common \$0 \$1 rotob;
+#X obj 439 45 == \$4;
+#X obj 439 71 s \$0-onoff;
+#X obj 440 21 r Mode\$2;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 9 0 25 0;
+#X connect 10 0 9 0;
+#X connect 11 0 9 0;
+#X connect 26 0 27 0;
+#X connect 28 0 26 0;
