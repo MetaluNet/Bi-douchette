@@ -1,4 +1,4 @@
-#N canvas 70 101 693 467 10;
+#N canvas 71 99 693 467 10;
 #X obj 194 10 r \$1-keys;
 #X obj 194 51 sel 1;
 #X obj 194 30 route \$2;
@@ -49,7 +49,7 @@
 -1;
 #X floatatom 284 238 5 0 0 0 - - -;
 #X floatatom 341 240 5 0 0 0 - - -;
-#N canvas 233 78 509 532 pitch 0;
+#N canvas 235 75 509 532 pitch 1;
 #X obj 123 222 t f f;
 #X obj 123 440 -;
 #X obj 123 201 tabread \$1-\$2-pitchs;
@@ -79,7 +79,6 @@
 #X obj 123 491 outlet;
 #X obj 339 114 inlet ambitus;
 #X obj 346 340 inlet adjust;
-#X obj 123 396 gammeRound \$0-gamme;
 #X obj 259 311 +;
 #X obj 370 241 inlet transpo;
 #X obj 123 464 clip -15 15;
@@ -87,13 +86,14 @@
 #X floatatom 63 436 5 0 0 0 - - -;
 #X floatatom 71 403 5 0 0 0 - - -;
 #X floatatom 66 488 5 0 0 0 - - -;
+#X obj 123 396 gammeRound xtalgam;
 #X connect 0 0 12 0;
 #X connect 0 1 1 1;
-#X connect 1 0 31 0;
-#X connect 1 0 35 0;
+#X connect 1 0 30 0;
+#X connect 1 0 34 0;
 #X connect 2 0 0 0;
-#X connect 2 0 32 0;
-#X connect 3 0 29 0;
+#X connect 2 0 31 0;
+#X connect 3 0 28 0;
 #X connect 4 0 3 0;
 #X connect 4 1 5 0;
 #X connect 5 0 6 0;
@@ -104,8 +104,8 @@
 #X connect 9 0 10 0;
 #X connect 10 0 16 0;
 #X connect 11 0 10 0;
-#X connect 12 0 28 0;
-#X connect 12 0 34 0;
+#X connect 12 0 33 0;
+#X connect 12 0 35 0;
 #X connect 13 0 14 0;
 #X connect 14 0 17 0;
 #X connect 16 0 5 1;
@@ -121,10 +121,10 @@
 #X connect 24 1 20 0;
 #X connect 26 0 10 0;
 #X connect 27 0 17 0;
-#X connect 28 0 1 0;
-#X connect 28 0 33 0;
-#X connect 30 0 29 1;
-#X connect 31 0 25 0;
+#X connect 29 0 28 1;
+#X connect 30 0 25 0;
+#X connect 35 0 1 0;
+#X connect 35 0 32 0;
 #X restore 223 307 pd pitch;
 #X obj 223 275 t a a;
 #X obj 28 90 subvox2 \$0 0 \$1;
