@@ -1,4 +1,4 @@
-#N canvas 186 296 525 496 10;
+#N canvas 187 294 677 575 10;
 #X obj 15 180 tgl 20 0 \$0-on-snd \$0-on-rcv empty 0 -6 0 8 -258699
 -1 -1 0 1;
 #X obj 14 160 r \$0-onoff;
@@ -96,26 +96,72 @@
 #X obj 183 16 loadbang;
 #X obj 55 116 mknob 25 100 0 1 0 1 \$0-volgran-snd \$0-volgran-rcv
 volgran -2 -6 193 10 -258699 -1 -1 9900 1;
-#X obj 198 276 Voix2 \$0 3 3;
 #X obj 175 108 Bank \$0 2 FluteB 8 1;
 #X obj 182 175 Bank \$0 5 Cello 8 1;
 #X obj 172 85 Bank \$0 1 Epinette 8 1.5;
 #X obj 186 132 Bank \$0 3 Percu 12 3;
 #X obj 178 156 Bank \$0 4 GtDidier 8 0.3;
 #X obj 171 206 Bank \$0 6 CBNicolas 8 1.2;
+#X obj 154 63 Common \$0 \$1 myoso;
+#X obj 343 44 == \$4;
+#X obj 343 70 s \$0-onoff;
+#X obj 344 20 r Mode\$2;
+#X obj 198 276 Voix2 \$0 3 3;
 #X obj 195 237 Voix2 \$0 1 1;
 #X obj 198 257 Voix2 \$0 2 2;
 #X obj 199 296 Voix2 \$0 4 4;
 #X obj 200 317 Voix2 \$0 5 5;
 #X obj 200 341 Voix2 \$0 0 6;
-#X obj 154 63 Common \$0 \$1 myoso;
-#X obj 343 44 == \$4;
-#X obj 343 70 s \$0-onoff;
-#X obj 344 20 r Mode\$2;
+#X obj 356 231 r axl\$3-x;
+#X obj 524 221 r axl\$3-y;
+#X obj 523 252 maxlib/scale 0.2 0.5 0 1;
+#X obj 359 289 clip 0 1;
+#X obj 520 275 clip 0 1;
+#X obj 355 316 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 523 302 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 332 346 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 493 339 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 492 393 change;
+#X obj 465 423 b;
+#X obj 434 528 s \$0-keys;
+#X msg 432 500 \$1 1;
+#X obj 490 454 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 490 367 > 0.4;
+#X floatatom 389 477 5 0 0 0 - - -, f 5;
+#X obj 437 470 i;
+#X obj 398 404 + 1;
+#X obj 358 266 maxlib/scale 0.2 0.5 0 1;
+#X obj 367 376 * 5.5;
+#X obj 395 432 clip 1 6;
 #X connect 0 0 3 0;
 #X connect 1 0 0 0;
-#X connect 8 0 24 0;
+#X connect 8 0 18 0;
 #X connect 9 0 8 0;
 #X connect 10 0 8 0;
-#X connect 25 0 26 0;
-#X connect 27 0 25 0;
+#X connect 19 0 20 0;
+#X connect 21 0 19 0;
+#X connect 28 0 35 0;
+#X connect 28 0 46 0;
+#X connect 29 0 30 0;
+#X connect 29 0 36 0;
+#X connect 30 0 32 0;
+#X connect 31 0 33 0;
+#X connect 32 0 34 0;
+#X connect 33 0 47 0;
+#X connect 36 0 42 0;
+#X connect 37 0 38 0;
+#X connect 38 0 41 0;
+#X connect 38 0 44 0;
+#X connect 40 0 39 0;
+#X connect 42 0 37 0;
+#X connect 44 0 40 0;
+#X connect 45 0 48 0;
+#X connect 46 0 31 0;
+#X connect 47 0 45 0;
+#X connect 48 0 43 0;
+#X connect 48 0 44 1;
