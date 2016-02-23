@@ -1,4 +1,4 @@
-#N canvas 51 169 693 467 10;
+#N canvas 52 166 693 467 10;
 #X obj 194 10 r \$1-keys;
 #X obj 194 51 sel 1;
 #X obj 194 30 route \$2;
@@ -152,13 +152,13 @@
 #X floatatom 503 276 5 0 0 0 - - -;
 #X obj 406 130 f 1;
 #X obj 398 279 random 0;
-#X obj 28 90 subvox2 \$0 0 \$1;
 #X obj 500 238 r \$1-len;
 #X obj 66 150 #subvox2 \$0 3 \$1;
 #X obj 77 172 #subvox2 \$0 4 \$1;
 #X floatatom 149 384 5 0 0 0 - - -;
-#X obj 41 110 subvox2 \$0 1 \$1;
 #X obj 54 130 subvox2 \$0 2 \$1;
+#X obj 28 90 subvox2 \$0 0 \$1;
+#X obj 41 110 subvox2 \$0 1 \$1;
 #X obj 179 347 mod 3;
 #X connect 0 0 2 0;
 #X connect 1 0 6 0;
@@ -170,7 +170,6 @@
 #X connect 5 1 8 0;
 #X connect 6 0 22 0;
 #X connect 9 0 15 1;
-#X connect 9 0 25 0;
 #X connect 10 0 9 0;
 #X connect 10 1 14 0;
 #X connect 12 0 13 0;
@@ -198,7 +197,6 @@
 #X connect 33 0 15 5;
 #X connect 34 0 32 0;
 #X connect 35 0 16 0;
-#X connect 37 0 15 5;
+#X connect 36 0 15 5;
 #X connect 43 0 12 1;
 #X connect 43 0 15 0;
-#X connect 43 0 40 0;
